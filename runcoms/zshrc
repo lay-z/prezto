@@ -11,3 +11,97 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+#
+###################################################################
+##################    Custom Alias    #############################
+###################################################################
+alias activate="source ./venv/bin/activate"
+alias docs="subl ~/Dropbox/Documentation"
+alias clip="xclip -i -selection clipboard"
+
+
+
+###################################################################
+##################    Git fun #####################################
+###################################################################
+
+alias gitlog="git log --oneline --graph --color --decorate --all"
+
+function gstash () {
+	git add --all;	
+	git commit -am "STASHED";
+}
+
+function gapply () {
+	git log -n 1 | grep STASHED > /dev/null
+	if [ $? -eq 0 ];
+	then
+		echo "unstashing stash"
+		git reset HEAD^
+	else
+		echo "No stash found"
+	fi
+}
+
+
+###################################################################
+#################### Custom functions #############################
+###################################################################
+# PrettyPrints json nicely using xclip and jq
+function ppjson () {
+	xclip -selection clipboard -o | jq '.'
+}
+
+function pppyjson () {
+	xclip -selection clipboard -o | tr "'" '"' | tr "True" "true" | jq '.'
+}
+
+
+###################################################################
+##################    go instalation  #############################
+###################################################################
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$HOME/.go/bin:$HOME/go/bin
+
+# Add everledger go directory
+export EVER_GOPATH=$GOPATH/src/bitbucket.org/everledger
+
+force_color_prompt=yes
+
+# Set it so that go mod is the default
+export GO111MODULE=on
+
+################## PATH stuff ####################################
+# Add home bin directory to path
+export PATH=$PATH:~/bin
+
+# CD PATH, quick search through these directories for faster access
+export CDPATH=".:$EVER_GOPATH"
+
+# Add snap directory to path?
+emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+
+###################### Kubectl stuff ##########################
+
+source <(kubectl completion zsh)
+
+
+###################################################################
+##################     NVM    #####################################
+###################################################################
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/sls.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/slss.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/slss.zsh
+
+# Python pathing
+PATH=$PATH:/home/layz/.local/bin
