@@ -60,8 +60,9 @@ function pppyjson () {
 ###################################################################
 ##################    go instalation  #############################
 ###################################################################
+export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$HOME/.go/bin:$HOME/go/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Add everledger go directory
 export EVER_GOPATH=$GOPATH/src/bitbucket.org/everledger
@@ -83,7 +84,7 @@ emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
 ###################### Kubectl stuff ##########################
 
-source <(kubectl completion zsh)
+#source <(kubectl completion zsh)
 
 
 ###################################################################
@@ -92,16 +93,6 @@ source <(kubectl completion zsh)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/sls.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/slss.zsh ]] && . /home/layz/Everledger/evl-slate-auth/node_modules/tabtab/.completions/slss.zsh
 
 # Python pathing
 PATH=$PATH:/home/layz/.local/bin
