@@ -96,3 +96,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Python pathing
 PATH=$PATH:/home/layz/.local/bin
+
+# Set the default editor for most stuff
+export VISUAL=vim
+export EDITOR="$VISUAL"
